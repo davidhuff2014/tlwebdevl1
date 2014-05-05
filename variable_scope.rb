@@ -14,4 +14,5 @@ end
 over_under(count)
 p count
 count = add_one(count)
+mynum.add_one(count)
 p count
