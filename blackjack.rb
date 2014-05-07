@@ -1,4 +1,25 @@
 # encoding: UTF-8
+
+def calc_total(cards)
+  # p cards[0].first.is_a? Numeric
+  if cards[0].first.is_a? Numeric
+    accum = cards[0].first
+  else accum = 10
+  end
+
+  if cards[1].first.is_a? Numeric
+    accum += cards[1].first
+  else accum + 10
+  end
+# might need to break this into another method
+  # if accum > 21
+  #   if cards[0].first == 'A' || cards[1].first == 'A'
+  #     accum - 10
+  #   end
+  # end
+  # p cards[0].first.to_i + cards[1].first.to_i
+end
+
 # cards 4 of each suit or 4 of each
 # 2, 3, 4, 5, 6, 7, 8, 9, 10, J=10, Q=10, K=10, A=11 or 1
 # dealer stays >= 17
@@ -22,14 +43,15 @@
 # deck.merge!(h)
 # p deck
 
-# puts 'Player, please enter your first name.'
-# pname = gets.chomp.to_s
-# puts 'Welcome ' + pname + ' to Blackjack where your money will soon be mine'
+puts 'Player, please enter your first name.'
+pname = gets.chomp.to_s
+puts 'Welcome ' + pname + ' to Blackjack where your money will soon be mine'
 puts 'Enter your first wager.'
 wager = gets.chomp.to_i
-puts "That is $#{wager} down the drain."
-# dealer_score = 0
-# player_score = 0
+puts "Kiss that $#{wager} down the drain."
+dealer_score = 0
+player_score = 0
+# accum = 0
 # v = deck.values[0]
 # p v
 # player_score += v
@@ -38,11 +60,11 @@ puts "That is $#{wager} down the drain."
 # p k
 # p v
 # p deck[0]
-# suits = ['C', 'S', 'D', 'H']
-suits = %w(C, S, D, H)
+suits = ['C', 'S', 'D', 'H']
+# suits = %w('C', 'S', 'D', 'H')
 # p suits
-# cards = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
-cards = %w(2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K)
+cards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A']
+# cards = %w('2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A')
 
 deck = cards.product(suits)
 deck.shuffle!
@@ -59,8 +81,20 @@ dealer_cards << deck.pop
 # dealer_score = calc_total(dealer_cards)
 
 puts "Dealer has: #{dealer_cards[0]} and #{dealer_cards[1]}"
-puts "Player has: #{player_cards[0]} and #{player_cards[1]}"
+puts "#{pname} has: #{player_cards[0]} and #{player_cards[1]}"
 puts ''
 puts 'Would you like to 1) hit or 2) stay?'
 hit_or_stay = gets.chomp
 p hit_or_stay
+# p player_cards[0].first
+# p calc_total
+# player_score += calc_total(player_cards[0].first.to_i)
+# player_score += calc_total(player_cards[1].first.to_i)
+# dealer_score += calc_total(dealer_score[0].first.to_i)
+# dealer_score += calc_total(dealer_score[1].first.to_i)
+player_score = calc_total(player_cards)
+# player_score += calc_total(player_cards[1].first.to_i)
+dealer_score = calc_total(dealer_cards)
+# dealer_score += calc_total(dealer_score[1].first.to_i)
+p player_score
+p dealer_score
