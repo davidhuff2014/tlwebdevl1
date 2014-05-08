@@ -1,24 +1,28 @@
 # encoding: UTF-8
 
 def calc_total(cards)
-  # p cards[0].first.is_a? Numeric
-  # p cards.size
-  if cards[0].first == 'A'
-    accum = 11
-  elsif cards[0].first.is_a? Numeric
-    accum = cards[0].first
-  else accum = 10
-  end
+  # [['2', 'S'], ['A', 'H']] <== like my representation reversed
+  arr = cards.map { |e| e[0] }
 
-  if cards.size == 2
-    if cards[1].first == 'A'
-      accum += 11
-    elsif cards[1].first.is_a? Numeric
-      accum += cards[1].first
-    else accum + 10
+  total = 0
+  arr.each do |value|
+    if value == 'A'
+      total += 11
+    elsif value.to_i == 0 # J, Q, K
+      total += 10
+    else
+      total += value.to_i
     end
   end
+
+  # Ace correction when valuel > 21
+  arr.select { |e| e == 'A'}.count.times do
+    total -= 10 if total > 21
+  end
+
+  total
 end
+
 
 # cards 4 of each suit or 4 of each
 # 2, 3, 4, 5, 6, 7, 8, 9, 10, J=10, Q=10, K=10, A=11 or 1
@@ -64,12 +68,12 @@ hit_or_stay = ''
 suits = ['C', 'S', 'D', 'H']
 # suits = %w('C', 'S', 'D', 'H')
 # p suits
-cards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A']
+cards = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
 # cards = %w('2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A')
 
 deck = cards.product(suits)
 deck.shuffle!
-
+p deck 
 player_cards = []
 dealer_cards = []
 
