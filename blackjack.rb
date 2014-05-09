@@ -112,6 +112,10 @@ until hit_or_stay == '2'
     puts "Player has lost"
     break
   end
+  if player_score == 21 
+    puts "Player stays"
+    break
+  end
   puts 'Would you like to 1) hit or 2) stay?'
   hit_or_stay = gets.chomp
   if hit_or_stay == '2'
@@ -121,10 +125,18 @@ until hit_or_stay == '2'
   p player_cards
   player_score = calc_total(player_cards)
 end
+while dealer_score <= 17
+  dealer_cards << deck.pop
+  p dealer_cards
+  dealer_score = calc_total(dealer_cards)
+end
+puts "Dealer has: #{dealer_cards} , for a total of #{dealer_score}"
 if player_score > dealer_score && player_score <= 21
   puts "Player wins!"
 elsif dealer_score > player_score && dealer_score <=21
   puts "Dealer Wins!"
-else
-  puts "Player Wins"
+elsif player_score > 21
+  puts "Dealer Wins!"
+elsif dealer_score > 21
+  puts "Player Wins!"
 end
