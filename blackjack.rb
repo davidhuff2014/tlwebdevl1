@@ -2,7 +2,7 @@
 def calc_total(cards)
   # [['2', 'S'], ['A', 'H']] <== like my representation reversed
   arr = cards.map { |e| e[0] }
-
+  
   total = 0
   arr.each do |value|
     if value == 'A'
@@ -121,10 +121,10 @@ until hit_or_stay == '2'
   p player_cards
   player_score = calc_total(player_cards)
 end
-# if player_score > dealer_score && player_score <= 21
-#   puts "Player wins!"
-# elsif dealer_score > player_score && dealer_score <=21
-#   puts "Dealer Wins!"
-# else
-#   puts "Player Wins"
-# end
+if player_score > dealer_score && player_score <= 21
+  puts "Player wins!"
+elsif dealer_score > player_score && dealer_score <=21
+  puts "Dealer Wins!"
+else
+  puts "Player Wins"
+end
