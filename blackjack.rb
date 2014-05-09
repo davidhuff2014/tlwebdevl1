@@ -1,5 +1,4 @@
 # encoding: UTF-8
-
 def calc_total(cards)
   # [['2', 'S'], ['A', 'H']] <== like my representation reversed
   arr = cards.map { |e| e[0] }
@@ -73,7 +72,7 @@ cards = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
 
 deck = cards.product(suits)
 deck.shuffle!
-p deck 
+# p deck 
 player_cards = []
 dealer_cards = []
 
@@ -100,19 +99,27 @@ puts "Dealer has: #{dealer_cards[0]} and #{dealer_cards[1]}, for a total of #{de
 if dealer_score >= 17
   puts "Dealer Stays"
 end
-
+if dealer_score == 21
+  puts "Dealer has won"
+end
 # puts "#{pname} has: #{player_cards[0]} and #{player_cards[1]}"
 puts "Player has: #{player_cards[0]} and #{player_cards[1]}, for a total of #{player_score}"
 puts ''
-puts 'Would you like to 1) hit or 2) stay?'
+# puts 'Would you like to 1) hit or 2) stay?'
 until hit_or_stay == '2'
+  puts "Player has: #{player_cards} , for a total of #{player_score}"
+  if player_score > 21 
+    puts "Player has lost"
+    break
+  end
+  puts 'Would you like to 1) hit or 2) stay?'
   hit_or_stay = gets.chomp
-  player_cards = []
+  if hit_or_stay == '2'
+    break
+  end
   player_cards << deck.pop
   p player_cards
   player_score = calc_total(player_cards)
-  puts "Player has: #{player_cards[0]} and #{player_cards[1]}, for a total of #{player_score}"
-  puts 'Would you like to 1) hit or 2) stay?'
 end
 # if player_score > dealer_score && player_score <= 21
 #   puts "Player wins!"
